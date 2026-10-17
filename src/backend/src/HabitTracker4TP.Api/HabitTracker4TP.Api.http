@@ -1,0 +1,48 @@
+@HabitTracker4TP.Api_HostAddress = http://localhost:5171
+
+GET {{HabitTracker4TP.Api_HostAddress}}/api/health
+Accept: application/json
+
+###
+
+GET {{HabitTracker4TP.Api_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###
+
+GET {{HabitTracker4TP.Api_HostAddress}}/api/habits?date=2026-10-17
+Accept: application/json
+
+###
+
+PUT {{HabitTracker4TP.Api_HostAddress}}/api/habits/00000000-0000-0000-0000-000000000000/completions/2026-10-17
+
+###
+
+DELETE {{HabitTracker4TP.Api_HostAddress}}/api/habits/00000000-0000-0000-0000-000000000000/completions/2026-10-17
+
+###
+
+GET {{HabitTracker4TP.Api_HostAddress}}/api/perfect-days?from=2026-10-01&to=2026-10-31
+Accept: application/json
+
+###
+
+GET {{HabitTracker4TP.Api_HostAddress}}/api/progress
+Accept: application/json
+
+###
+
+POST {{HabitTracker4TP.Api_HostAddress}}/api/habits
+Content-Type: application/json
+
+{
+	"name": "Morning run",
+	"icon": "running",
+	"color": "mint",
+	"startDate": "2026-10-17",
+	"repeats": false,
+	"endDate": null
+}
+
+###

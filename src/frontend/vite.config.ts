@@ -1,0 +1,24 @@
+import tailwindcss from '@tailwindcss/vite'
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vitest/config'
+
+const API_TARGET = process.env.VITE_API_TARGET ?? 'http://localhost:5171'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  server: {
+    host: true,
+    port: 5173,
+    strictPort: true,
+    proxy: {
+      '/api': { target: API_TARGET, changeOrigin: true },
+    },
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.ts'],
+    unstubGlobals: true,
+    restoreMocks: true,
+  },
+})

@@ -1,0 +1,24 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+TestResults/
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Node
+node_modules/
+dist/
+coverage/
+*.local
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.playwright-mcp/

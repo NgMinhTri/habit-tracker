@@ -1,0 +1,204 @@
+@import 'tailwindcss';
+
+/* Design tokens from working-artifacts/design-system/habit-tracker/DESIGN.md.
+   Use these instead of Tailwind palette colors or hex literals. */
+@theme {
+  --font-sans: Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Core palette */
+  --color-ink: #0f0f33;
+  --color-text: #2d3748;
+  --color-text-secondary: #5b5f78;
+  --color-muted: #8a8fa3;
+  --color-accent: #7b8ef0;
+  --color-accent-progress-start: #9da9f7;
+  --color-accent-soft: #bfc6f5;
+  --color-surface: #ffffff;
+  --color-chip: #ececf2;
+  --color-line: #eef0f6;
+  --color-success: #5fcb71;
+  --color-success-border: #4db961;
+  --color-gold: #ffcb2f;
+  --color-gold-light: #ffd95c;
+  --color-gold-ring: #f0b400;
+  --color-danger: #d9534f;
+  --color-danger-soft: #fdecec;
+
+  /* Supporting neutrals */
+  --color-nav-inactive: #a4a9ba;
+  --color-placeholder: #9a9fb2;
+  --color-check-outline: #b7bbc9;
+  --color-done-title: #7d8597;
+  --color-toggle-off: #d1d1db;
+  --color-calendar-day: #6e7488;
+  --color-icon-cell: #f3f3f8;
+  --color-icon-cell-selected: #dde2fc;
+  --color-topbar-button: #e6eefb;
+  --color-topbar-button-icon: #6f86b5;
+
+  /* Habit colors: fill / ring (keys match the stored color key) */
+  --color-habit-rose: #fadddd;
+  --color-habit-rose-ring: #efc3c3;
+  --color-habit-peach: #fdefdd;
+  --color-habit-peach-ring: #f0d9bb;
+  --color-habit-yellow: #f6f2da;
+  --color-habit-yellow-ring: #e4ddb0;
+  --color-habit-green: #e4f3da;
+  --color-habit-green-ring: #c9e3b8;
+  --color-habit-mint: #ddf5e8;
+  --color-habit-mint-ring: #b9e4cb;
+  --color-habit-blue: #dfeaf5;
+  --color-habit-blue-ring: #bdd3ea;
+  --color-habit-lilac: #f3e0f7;
+  --color-habit-lilac-ring: #ddbde6;
+
+  /* Typography (size + weight); colors come from --color-* */
+  --text-page-title: 34px;
+  --text-page-title--font-weight: 700;
+  --text-page-title--letter-spacing: -0.5px;
+  --text-page-date: 20px;
+  --text-page-date--font-weight: 500;
+  --text-screen-title: 24px;
+  --text-screen-title--font-weight: 600;
+  --text-name-input: 26px;
+  --text-name-input--font-weight: 600;
+  --text-card-title: 21px;
+  --text-card-title--font-weight: 600;
+  --text-state-heading: 20px;
+  --text-state-heading--font-weight: 700;
+  --text-button-primary: 20px;
+  --text-button-primary--font-weight: 600;
+  --text-row-label: 18px;
+  --text-row-label--font-weight: 500;
+  --text-month-title: 18px;
+  --text-month-title--font-weight: 500;
+  --text-section-label: 17px;
+  --text-section-label--font-weight: 600;
+  --text-record-row: 17px;
+  --text-record-row--font-weight: 500;
+  --text-body: 16px;
+  --text-body--line-height: 1.45;
+  --text-button-soft: 16px;
+  --text-button-soft--font-weight: 600;
+  --text-card-sub: 15px;
+  --text-chip-label: 15px; /* DESIGN.md "chip"; renamed to avoid clashing with --color-chip */
+  --text-chip-label--font-weight: 600;
+  --text-nav-label: 14px;
+  --text-nav-label--font-weight: 500;
+  --text-message: 14px;
+  --text-message--font-weight: 500;
+  --text-caption: 13px;
+  --text-caption--font-weight: 600;
+  --text-caption--line-height: 1.5;
+  --text-calendar-header: 12px;
+  --text-calendar-header--letter-spacing: 0.5px;
+
+  /* Shapes */
+  --radius-pill: 999px;
+  --radius-sheet: 32px;
+  --radius-card: 26px;
+  --radius-nav: 28px;
+  --radius-cell: 20px;
+  --radius-round-button: 14px;
+  --radius-message: 14px;
+  --radius-chip: 12px;
+  --radius-bar: 8px;
+
+  /* Elevation */
+  --shadow-panel: 0 6px 18px rgba(80, 90, 150, 0.1);
+  --shadow-sheet: 0 -4px 20px rgba(120, 120, 180, 0.06);
+  --shadow-nav: 0 -6px 22px rgba(100, 110, 170, 0.1);
+  --shadow-fab: 0 10px 22px rgba(123, 142, 240, 0.5);
+  --shadow-button-primary: 0 10px 22px rgba(15, 15, 51, 0.25);
+  --shadow-toggle-knob: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+  /* Layout: app column never wider than 440px (max-w-app) */
+  --container-app: 440px;
+}
+
+@utility bg-app {
+  background-image: linear-gradient(180deg, #f4f0fd 0%, #fff6ee 38%, #ffffff 70%);
+}
+
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@utility skeleton-shimmer {
+  background: linear-gradient(90deg, #f1f2f8 25%, #e8eaf4 37%, #f1f2f8 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.3s infinite;
+}
+
+.daily-progress {
+  display: block;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--color-chip);
+}
+
+.daily-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-accent-progress-start), var(--color-accent));
+  transition: width 350ms ease;
+}
+
+.daily-progress-fill-perfect {
+  background: linear-gradient(90deg, var(--color-gold-light), var(--color-gold));
+}
+
+@keyframes completion-pop {
+  0% {
+    transform: scale(1);
+  }
+  55% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-completion-pop {
+  animation: completion-pop 220ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-completion-pop,
+  .daily-progress-fill {
+    animation: none;
+    transition: none;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-surface text-text antialiased;
+  }
+
+  /* < 16px makes iOS Safari zoom on focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}

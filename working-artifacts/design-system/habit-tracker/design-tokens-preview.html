@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Habit Tracker — Design tokens preview</title>
+<style>
+/* Tokens copied from DESIGN.md (Observed from the mockup). No external files or scripts. */
+:root{
+  --ink:#0F0F33;--text:#2D3748;--text-secondary:#5B5F78;--muted:#8A8FA3;
+  --accent:#7B8EF0;--accent-soft:#BFC6F5;--surface:#FFFFFF;--chip:#ECECF2;--line:#EEF0F6;
+  --success:#5FCB71;--success-border:#4DB961;--gold:#FFCB2F;--gold-ring:#F0B400;
+  --danger:#D9534F;--danger-soft:#FDECEC;
+  --nav-inactive:#A4A9BA;--placeholder:#9A9FB2;--check-outline:#B7BBC9;--done-title:#7D8597;--toggle-off:#D1D1DB;
+  --calendar-day:#6E7488;--icon-cell:#F3F3F8;--icon-cell-selected:#DDE2FC;--topbar-button:#E6EEFB;--topbar-button-icon:#6F86B5;
+  --c-rose:#FADDDD;--r-rose:#EFC3C3;--c-peach:#FDEFDD;--r-peach:#F0D9BB;--c-yellow:#F6F2DA;--r-yellow:#E4DDB0;
+  --c-green:#E4F3DA;--r-green:#C9E3B8;--c-mint:#DDF5E8;--r-mint:#B9E4CB;--c-blue:#DFEAF5;--r-blue:#BDD3EA;--c-lilac:#F3E0F7;--r-lilac:#DDBDE6;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --radius-pill:999px;--radius-sheet:32px;--radius-card:26px;--radius-nav:28px;--radius-cell:20px;--radius-btn:14px;--radius-chip:12px;
+  --shadow:0 6px 18px rgba(80,90,150,.10);--shadow-fab:0 10px 22px rgba(123,142,240,.5);--shadow-primary:0 10px 22px rgba(15,15,51,.25);--shadow-nav:0 -6px 22px rgba(100,110,170,.10);--shadow-sheet:0 -4px 20px rgba(120,120,180,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;padding:var(--s5);background:#E9E7F5;color:var(--text);font-family:Figtree,system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:980px;margin:0 auto;display:grid;gap:var(--s5)}
+h1{margin:0;font-size:28px;color:var(--ink)}
+.lead{margin:var(--s2) 0 0;color:var(--text-secondary);font-size:15px;line-height:1.5}
+section{background:#fff;border-radius:var(--radius-card);box-shadow:var(--shadow);padding:var(--s5)}
+section>h2{margin:0 0 var(--s4);font-size:17px;font-weight:600;color:var(--ink)}
+h3{margin:var(--s4) 0 var(--s2);font-size:14px;font-weight:600;color:var(--text-secondary)}
+.grid{display:grid;gap:var(--s3)}
+.swatches{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.sw{border-radius:var(--radius-btn);overflow:hidden;border:1px solid var(--line);font-size:12px}
+.sw i{display:block;height:48px}
+.sw div{padding:6px 8px;line-height:1.35}
+.sw b{display:block;font-weight:600;color:var(--ink)}
+.sw span{color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center}
+.type-row{display:flex;gap:var(--s4);align-items:baseline;padding:6px 0;border-top:1px solid var(--line)}
+.type-row:first-child{border-top:0}
+.type-row small{flex:0 0 250px;font-size:12px;color:var(--muted)}
+.scale{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:flex-end}
+.scale div{background:var(--accent-soft);border-radius:4px;display:grid;place-items:end center;font-size:11px;color:var(--ink);padding-bottom:2px}
+.radii div{width:92px;height:64px;background:var(--chip);display:grid;place-items:center;font-size:11px;color:var(--text-secondary);text-align:center}
+.demo{background:linear-gradient(180deg,#F4F0FD 0%,#FFF6EE 38%,#FFFFFF 70%);border-radius:var(--radius-card);padding:var(--s4)}
+.demo.narrow{max-width:390px}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;padding:0}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn-primary{height:64px;padding:0 var(--s6);border-radius:var(--radius-pill);background:var(--ink);color:#fff;font-size:20px;font-weight:600;box-shadow:var(--shadow-primary)}
+.btn-primary:hover{background:#1b1b4a}
+.btn-soft{background:var(--accent);color:#fff;border-radius:var(--radius-pill);padding:12px 22px;font-weight:600}
+.btn-disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.fab{width:68px;height:68px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:32px;box-shadow:var(--shadow-fab)}
+.fab:hover{transform:scale(1.06)}
+.round{width:40px;height:40px;border-radius:var(--radius-btn);background:var(--chip);display:grid;place-items:center;color:var(--text);font-size:18px}
+.round:hover{background:#E2E3EE}
+.round.top{background:var(--topbar-button);color:var(--topbar-button-icon)}
+.card{display:flex;align-items:center;gap:var(--s4);padding:20px;border-radius:var(--radius-card);margin-bottom:var(--s3);width:100%;text-align:left}
+.card .emo{font-size:38px;width:56px;text-align:center;line-height:1}
+.card .txt{flex:1;min-width:0}
+.card .ttl{font-size:21px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .sub{font-size:15px;color:var(--muted);margin-top:2px}
+.check{width:34px;height:34px;border-radius:50%;border:2px solid var(--check-outline);display:grid;place-items:center;color:#fff;font-size:18px;font-weight:700}
+.card.done{opacity:.62}.card.done .ttl{text-decoration:line-through;color:var(--done-title)}
+.card.done .check{background:var(--success);border-color:var(--success-border)}
+.progress{display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s3)}
+.pill{background:var(--chip);border-radius:var(--radius-pill);padding:5px 12px;font-size:13px;font-weight:600;color:var(--text-secondary);white-space:nowrap}
+.bar{flex:1;height:8px;border-radius:8px;background:var(--chip);overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#9DA9F7,var(--accent));border-radius:8px}
+.bar.full i{background:linear-gradient(90deg,#FFD95C,var(--gold))}
+.link{font-size:13px;font-weight:600;color:var(--accent)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.day{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0 10px;border-radius:var(--radius-card);font-size:13px;color:var(--muted);font-weight:500}
+.day .dot{width:38px;height:38px;border-radius:50%;background:var(--chip);display:grid;place-items:center;font-weight:600;color:var(--muted);font-size:14px}
+.day.sel{background:var(--accent-soft);color:var(--ink)}.day.sel .dot{background:#fff;color:var(--ink)}
+.day.today:not(.sel) .dot{box-shadow:inset 0 0 0 2px var(--accent)}
+.day.perfect .dot{background:var(--gold);box-shadow:inset 0 0 0 2px var(--gold-ring);color:#fff}
+.sw-habit{display:flex;gap:var(--s3);flex-wrap:wrap}
+.hs{width:42px;height:42px;border-radius:50%;border:2.5px solid;display:grid;place-items:center;font-size:18px;color:var(--text)}
+.hs.sel{transform:scale(1.1)}
+.name{width:100%;text-align:center;font:600 26px/1.2 inherit;font-family:inherit;color:var(--ink);border:0;background:transparent;outline:none;padding:6px 8px;border-bottom:2px dashed var(--accent-soft)}
+.name.err{border-bottom-color:var(--danger)}
+.name::placeholder{color:var(--placeholder)}
+.err-msg{color:var(--danger);background:var(--danger-soft);border-radius:var(--radius-btn);font-size:14px;font-weight:500;padding:8px 14px;margin-top:var(--s2)}
+.group{background:#fff;border-radius:var(--radius-card);box-shadow:var(--shadow);overflow:hidden}
+.frow{display:flex;align-items:center;justify-content:space-between;padding:0 var(--s5);min-height:60px;font-size:18px;font-weight:500;color:var(--text)}
+.frow+.frow{border-top:1px solid var(--line)}
+.frow .val{color:var(--muted);font-size:15px}
+.toggle{width:52px;height:30px;border-radius:30px;background:var(--toggle-off);position:relative}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle.on{background:var(--accent)}.toggle.on::after{transform:translateX(22px)}
+.chip{background:#E1E2EE;color:var(--text-secondary);border-radius:var(--radius-chip);padding:8px 14px;font-size:15px;font-weight:600;display:inline-block}
+.chip.active{background:var(--accent);color:#fff}
+.icon-btn{width:112px;height:112px;border-radius:50%;background:#fff;box-shadow:var(--shadow);font-size:68px;line-height:1;position:relative;display:grid;place-items:center}
+.icon-btn .edit{position:absolute;right:2px;bottom:4px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:14px;border:3px solid #fff}
+.cells{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s3);max-width:340px}
+.cell{aspect-ratio:1;border-radius:var(--radius-cell);background:var(--icon-cell);font-size:34px;display:grid;place-items:center}
+.cell:hover{background:#E8EAFB;transform:scale(1.06)}
+.cell.sel{background:var(--icon-cell-selected);box-shadow:inset 0 0 0 2.5px var(--accent)}
+.sec{font-size:17px;font-weight:600;color:var(--ink);margin:0 0 var(--s2)}
+.panel{background:#fff;border-radius:var(--radius-card);box-shadow:var(--shadow);padding:var(--s2) 0}
+.rec{display:flex;justify-content:space-between;padding:0 var(--s5);min-height:58px;align-items:center;font-size:17px;font-weight:500}
+.rec+.rec{border-top:1px solid var(--line)}.rec b{font-weight:600;color:var(--ink)}
+.top-row{display:grid;grid-template-columns:44px 1fr auto;gap:var(--s3);align-items:center;padding:12px var(--s4)}
+.top-row+.top-row{border-top:1px solid var(--line)}
+.top-row .em{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:24px}
+.top-row .nm{font-weight:600;color:var(--ink);font-size:17px}
+.top-row .mini{height:6px;border-radius:6px;background:var(--chip);margin-top:6px;overflow:hidden}.top-row .mini i{display:block;height:100%;background:var(--accent)}
+.top-row .n{font-size:15px;font-weight:600;color:var(--text-secondary)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);row-gap:6px;text-align:center;max-width:340px}
+.cal .wd{font-size:12px;letter-spacing:.5px;color:var(--nav-inactive);padding:8px 0}
+.cal .d{height:44px;display:grid;place-items:center;font-size:16px;color:var(--calendar-day)}
+.cal .d span{width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+.cal .d.today span{box-shadow:inset 0 0 0 2px var(--accent)}
+.cal .d.perfect span{background:var(--gold);box-shadow:inset 0 0 0 2px var(--gold-ring);color:#fff}
+.toast{display:inline-block;background:var(--ink);color:#fff;border-radius:var(--radius-pill);padding:10px 18px;font-size:14px;font-weight:500}
+.nav{display:grid;grid-template-columns:1fr 1fr;height:88px;background:#fff;border-radius:var(--radius-nav) var(--radius-nav) 0 0;box-shadow:var(--shadow-nav);padding:10px 40px 14px;max-width:390px}
+.nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:14px;font-weight:500;color:var(--nav-inactive)}
+.nav button.on{color:var(--ink);font-weight:600}.nav span{font-size:24px}
+.empty{text-align:center;padding:24px var(--s5);color:var(--muted)}
+.empty .big{font-size:64px;margin-bottom:var(--s3)}.empty h3{margin:0 0 6px;color:var(--text);font-size:20px;font-weight:700}.empty p{margin:0 0 var(--s4);line-height:1.45}
+.skel{height:96px;border-radius:var(--radius-card);background:linear-gradient(90deg,#F1F2F8 25%,#E8EAF4 37%,#F1F2F8 63%);background-size:400% 100%}
+.note{font-size:13px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Habit Tracker — Design tokens preview</h1>
+    <p class="lead">Illustrates the tokens and components in <b>DESIGN.md</b>. Values are Observed from the mockup unless noted. The font stack lists Figtree first; it only renders if Figtree is installed, otherwise the system sans-serif is used. Hover and focus states work through CSS only.</p>
+  </header>
+
+  <section>
+    <h2>Colors</h2>
+    <h3>Core palette</h3>
+    <div class="grid swatches">
+      <div class="sw"><i style="background:#0F0F33"></i><div><b>ink</b><span>#0F0F33</span></div></div>
+      <div class="sw"><i style="background:#2D3748"></i><div><b>text</b><span>#2D3748</span></div></div>
+      <div class="sw"><i style="background:#5B5F78"></i><div><b>text-secondary</b><span>#5B5F78</span></div></div>
+      <div class="sw"><i style="background:#8A8FA3"></i><div><b>muted</b><span>#8A8FA3</span></div></div>
+      <div class="sw"><i style="background:#7B8EF0"></i><div><b>accent</b><span>#7B8EF0</span></div></div>
+      <div class="sw"><i style="background:#BFC6F5"></i><div><b>accent-soft</b><span>#BFC6F5</span></div></div>
+      <div class="sw"><i style="background:#FFFFFF"></i><div><b>surface</b><span>#FFFFFF</span></div></div>
+      <div class="sw"><i style="background:#ECECF2"></i><div><b>chip</b><span>#ECECF2</span></div></div>
+      <div class="sw"><i style="background:#EEF0F6"></i><div><b>line</b><span>#EEF0F6</span></div></div>
+      <div class="sw"><i style="background:#5FCB71"></i><div><b>success</b><span>#5FCB71 (border #4DB961)</span></div></div>
+      <div class="sw"><i style="background:#FFCB2F"></i><div><b>gold</b><span>#FFCB2F (ring #F0B400)</span></div></div>
+      <div class="sw"><i style="background:#D9534F"></i><div><b>danger</b><span>#D9534F</span></div></div>
+      <div class="sw"><i style="background:#FDECEC"></i><div><b>danger-soft</b><span>#FDECEC</span></div></div>
+    </div>
+    <h3>Supporting neutrals</h3>
+    <div class="grid swatches">
+      <div class="sw"><i style="background:#A4A9BA"></i><div><b>nav-inactive</b><span>#A4A9BA</span></div></div>
+      <div class="sw"><i style="background:#9A9FB2"></i><div><b>placeholder</b><span>#9A9FB2</span></div></div>
+      <div class="sw"><i style="background:#B7BBC9"></i><div><b>check-outline</b><span>#B7BBC9</span></div></div>
+      <div class="sw"><i style="background:#7D8597"></i><div><b>done-title</b><span>#7D8597</span></div></div>
+      <div class="sw"><i style="background:#D1D1DB"></i><div><b>toggle-off</b><span>#D1D1DB</span></div></div>
+      <div class="sw"><i style="background:#6E7488"></i><div><b>calendar-day</b><span>#6E7488</span></div></div>
+      <div class="sw"><i style="background:#F3F3F8"></i><div><b>icon-cell</b><span>#F3F3F8</span></div></div>
+      <div class="sw"><i style="background:#DDE2FC"></i><div><b>icon-cell-selected</b><span>#DDE2FC</span></div></div>
+      <div class="sw"><i style="background:#E6EEFB"></i><div><b>topbar-button</b><span>#E6EEFB (icon #6F86B5)</span></div></div>
+    </div>
+    <h3>Habit colors (fill, with ring)</h3>
+    <div class="grid swatches">
+      <div class="sw"><i style="background:#FADDDD;box-shadow:inset 0 -6px 0 #EFC3C3"></i><div><b>rose (default)</b><span>#FADDDD / #EFC3C3</span></div></div>
+      <div class="sw"><i style="background:#FDEFDD;box-shadow:inset 0 -6px 0 #F0D9BB"></i><div><b>peach</b><span>#FDEFDD / #F0D9BB</span></div></div>
+      <div class="sw"><i style="background:#F6F2DA;box-shadow:inset 0 -6px 0 #E4DDB0"></i><div><b>yellow</b><span>#F6F2DA / #E4DDB0</span></div></div>
+      <div class="sw"><i style="background:#E4F3DA;box-shadow:inset 0 -6px 0 #C9E3B8"></i><div><b>green</b><span>#E4F3DA / #C9E3B8</span></div></div>
+      <div class="sw"><i style="background:#DDF5E8;box-shadow:inset 0 -6px 0 #B9E4CB"></i><div><b>mint</b><span>#DDF5E8 / #B9E4CB</span></div></div>
+      <div class="sw"><i style="background:#DFEAF5;box-shadow:inset 0 -6px 0 #BDD3EA"></i><div><b>blue</b><span>#DFEAF5 / #BDD3EA</span></div></div>
+      <div class="sw"><i style="background:#F3E0F7;box-shadow:inset 0 -6px 0 #DDBDE6"></i><div><b>lilac</b><span>#F3E0F7 / #DDBDE6</span></div></div>
+    </div>
+    <h3>App background gradient</h3>
+    <div class="sw" style="max-width:340px"><i style="height:64px;background:linear-gradient(180deg,#F4F0FD 0%,#FFF6EE 38%,#FFFFFF 70%)"></i><div><b>app-background</b><span>#F4F0FD → #FFF6EE (38%) → #FFFFFF (70%)</span></div></div>
+  </section>
+
+  <section>
+    <h2>Typography — Figtree, weights 400 / 500 / 600 / 700</h2>
+    <div class="type-row"><small>page-title · 34 / 700 · -0.5px</small><span style="font-size:34px;font-weight:700;letter-spacing:-.5px;color:var(--ink)">Today</span></div>
+    <div class="type-row"><small>page-date · 20 / 500</small><span style="font-size:20px;font-weight:500;color:var(--muted)">Oct 17</span></div>
+    <div class="type-row"><small>screen-title · 24 / 600</small><span style="font-size:24px;font-weight:600;color:var(--ink)">New Habit</span></div>
+    <div class="type-row"><small>name-input · 26 / 600</small><span style="font-size:26px;font-weight:600;color:var(--ink)">Morning run</span></div>
+    <div class="type-row"><small>card-title · 21 / 600</small><span style="font-size:21px;font-weight:600">Drink water</span></div>
+    <div class="type-row"><small>state-heading · 20 / 700</small><span style="font-size:20px;font-weight:700">No habits yet</span></div>
+    <div class="type-row"><small>button-primary · 20 / 600</small><span style="font-size:20px;font-weight:600">Save</span></div>
+    <div class="type-row"><small>row-label / month-title · 18 / 500</small><span style="font-size:18px;font-weight:500">Set end date · October 2026</span></div>
+    <div class="type-row"><small>section-label · 17 / 600</small><span style="font-size:17px;font-weight:600;color:var(--ink)">Most repeated habits</span></div>
+    <div class="type-row"><small>body · 16 / 400 · lh 1.45</small><span style="font-size:16px;line-height:1.45">Plant your first habit and tick it off every day.</span></div>
+    <div class="type-row"><small>card-sub / value · 15 / 400–600</small><span style="font-size:15px;color:var(--muted)">Every day</span></div>
+    <div class="type-row"><small>nav-label · 14 / 500</small><span style="font-size:14px;font-weight:500">Today · Progress</span></div>
+    <div class="type-row"><small>message · 14 / 500</small><span style="font-size:14px;font-weight:500">Please give your habit a name.</span></div>
+    <div class="type-row"><small>caption · 13 / 600</small><span style="font-size:13px;font-weight:600;color:var(--text-secondary)">2 of 3 done</span></div>
+    <div class="type-row"><small>calendar-header · 12 / 400 · 0.5px</small><span style="font-size:12px;letter-spacing:.5px;color:var(--nav-inactive)">MON TUE WED THU FRI SAT SUN</span></div>
+  </section>
+
+  <section>
+    <h2>Spacing, shapes, and shadows</h2>
+    <h3>Spacing scale (s1–s6)</h3>
+    <div class="scale">
+      <div style="width:4px;height:4px"></div><div style="width:8px;height:8px"></div><div style="width:12px;height:12px"></div>
+      <div style="width:16px;height:16px"></div><div style="width:24px;height:24px"></div><div style="width:32px;height:32px"></div>
+      <span class="note">4 · 8 · 12 · 16 · 24 · 32 px</span>
+    </div>
+    <h3>Radii</h3>
+    <div class="row radii">
+      <div style="border-radius:999px">pill 999</div><div style="border-radius:32px">sheet 32</div><div style="border-radius:26px">card 26</div>
+      <div style="border-radius:28px">nav 28</div><div style="border-radius:20px">cell 20</div><div style="border-radius:14px">round button 14</div>
+      <div style="border-radius:12px">chip 12</div><div style="border-radius:8px">bar 8</div>
+    </div>
+    <h3>Shadows</h3>
+    <div class="row">
+      <div style="width:130px;height:64px;background:#fff;border-radius:var(--radius-card);box-shadow:var(--shadow);display:grid;place-items:center;font-size:12px">panel</div>
+      <div style="width:130px;height:64px;background:#fff;border-radius:var(--radius-card);box-shadow:var(--shadow-sheet);display:grid;place-items:center;font-size:12px">sheet</div>
+      <div style="width:130px;height:64px;background:#fff;border-radius:var(--radius-card);box-shadow:var(--shadow-nav);display:grid;place-items:center;font-size:12px">nav</div>
+      <div style="width:130px;height:64px;background:var(--accent);color:#fff;border-radius:var(--radius-card);box-shadow:var(--shadow-fab);display:grid;place-items:center;font-size:12px">fab</div>
+      <div style="width:130px;height:64px;background:var(--ink);color:#fff;border-radius:var(--radius-card);box-shadow:var(--shadow-primary);display:grid;place-items:center;font-size:12px">button-primary</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Buttons</h2>
+    <div class="row">
+      <button class="btn-primary">Save</button>
+      <button class="btn-soft">Add a habit</button>
+      <button class="fab" aria-label="Add habit">+</button>
+      <button class="round" aria-label="Previous week">‹</button>
+      <button class="round top" aria-label="Close">✕</button>
+      <button class="btn-primary btn-disabled" disabled>Save (disabled, Proposed 40%)</button>
+    </div>
+    <p class="note">No destructive button exists in the mockup (editing and deleting habits are out of scope). Hover over the buttons to see hover states; Tab to see the Proposed focus ring.</p>
+  </section>
+
+  <section>
+    <h2>Inputs and form controls</h2>
+    <div class="demo narrow">
+      <div class="row" style="justify-content:center"><div class="icon-btn">🌞<span class="edit">✎</span></div></div>
+      <input class="name" placeholder="Name your habit" aria-label="Habit name">
+      <input class="name err" value="" placeholder="Name your habit" aria-label="Habit name (error)" style="margin-top:var(--s3)">
+      <div class="err-msg">Please give your habit a name.</div>
+      <h3>Habit color swatches</h3>
+      <div class="sw-habit">
+        <span class="hs sel" style="background:#FADDDD;border-color:#EFC3C3">✓</span>
+        <span class="hs" style="background:#FDEFDD;border-color:#F0D9BB"></span>
+        <span class="hs" style="background:#F6F2DA;border-color:#E4DDB0"></span>
+        <span class="hs" style="background:#E4F3DA;border-color:#C9E3B8"></span>
+        <span class="hs" style="background:#DDF5E8;border-color:#B9E4CB"></span>
+        <span class="hs" style="background:#DFEAF5;border-color:#BDD3EA"></span>
+        <span class="hs" style="background:#F3E0F7;border-color:#DDBDE6"></span>
+      </div>
+      <h3>Form group (toggle, date chip, read-only value)</h3>
+      <div class="group">
+        <div class="frow">Repeat<button class="toggle on" aria-label="Repeat"></button></div>
+        <div class="frow">Start<span class="chip">Today</span></div>
+        <div class="frow">Frequency<span class="val">Every day</span></div>
+        <div class="frow">Set end date<button class="toggle" aria-label="Set end date"></button></div>
+        <div class="frow">End<span class="chip active">Oct 24</span></div>
+      </div>
+    </div>
+    <p class="note">The mockup has no checkbox, radio, or select controls, so none are defined.</p>
+  </section>
+
+  <section>
+    <h2>Icon picker</h2>
+    <div class="cells">
+      <div class="cell">🧘</div><div class="cell">🙆</div><div class="cell sel">💧</div><div class="cell">🏃</div><div class="cell">🚴</div>
+      <div class="cell">🏊</div><div class="cell">🚶</div><div class="cell">📖</div><div class="cell">✍️</div><div class="cell">🎧</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Today screen components</h2>
+    <div class="demo narrow">
+      <div class="week">
+        <div class="day"><span class="dot">12</span>Mon</div>
+        <div class="day"><span class="dot">13</span>Tue</div>
+        <div class="day perfect"><span class="dot">★</span>Wed</div>
+        <div class="day sel"><span class="dot">15</span>Thu</div>
+        <div class="day perfect"><span class="dot">★</span>Fri</div>
+        <div class="day today"><span class="dot">17</span>Sat</div>
+        <div class="day"><span class="dot">18</span>Sun</div>
+      </div>
+      <div style="height:var(--s4)"></div>
+      <div class="progress"><span class="pill">1 of 3 done</span><div class="bar"><i style="width:33%"></i></div><button class="link">Back to today</button></div>
+      <div class="progress"><span class="pill">3 of 3 done</span><div class="bar full"><i style="width:100%"></i></div></div>
+      <div class="card" style="background:var(--c-blue)"><span class="emo">🙆</span><span class="txt"><div class="ttl">Stretch</div><div class="sub">Every day</div></span><span class="check"></span></div>
+      <div class="card done" style="background:var(--c-peach)"><span class="emo">💧</span><span class="txt"><div class="ttl">Drink water</div><div class="sub">Every day</div></span><span class="check">✓</span></div>
+      <div class="card" style="background:var(--c-lilac)"><span class="emo">📖</span><span class="txt"><div class="ttl">Read 10 pages</div><div class="sub">Just once</div></span><span class="check"></span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Progress screen components</h2>
+    <div class="demo narrow">
+      <p class="sec">Your stars</p>
+      <div class="panel" style="padding:var(--s4)">
+        <div class="cal">
+          <div class="wd">MON</div><div class="wd">TUE</div><div class="wd">WED</div><div class="wd">THU</div><div class="wd">FRI</div><div class="wd">SAT</div><div class="wd">SUN</div>
+          <div class="d"><span>5</span></div><div class="d perfect"><span>★</span></div><div class="d perfect"><span>★</span></div><div class="d"><span>8</span></div><div class="d"><span>9</span></div><div class="d perfect"><span>★</span></div><div class="d today"><span>11</span></div>
+        </div>
+      </div>
+      <p class="sec" style="margin-top:var(--s4)">Record</p>
+      <div class="panel"><div class="rec">Perfect Days<b>6 days</b></div><div class="rec">Best Streak<b>3 days</b></div><div class="rec">Total Habits Done<b>3</b></div></div>
+      <p class="sec" style="margin-top:var(--s4)">Most repeated habits</p>
+      <div class="panel">
+        <div class="top-row"><span class="em" style="background:var(--c-blue)">🙆</span><div><div class="nm">Stretch</div><div class="mini"><i style="width:100%"></i></div></div><span class="n">9 days</span></div>
+        <div class="top-row"><span class="em" style="background:var(--c-peach)">💧</span><div><div class="nm">Drink water</div><div class="mini"><i style="width:78%"></i></div></div><span class="n">7 days</span></div>
+        <div class="top-row"><span class="em" style="background:var(--c-rose)">🌞</span><div><div class="nm">Morning walk</div><div class="mini"><i style="width:0%"></i></div></div><span class="n">0 days</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Navigation, feedback, and states</h2>
+    <div class="nav"><button class="on"><span>⌂</span>Today</button><button><span>◔</span>Progress</button></div>
+    <h3>Toast</h3>
+    <span class="toast">Habit added ✨</span>
+    <h3>Validation message (danger). Success and warning alerts are not defined in the mockup.</h3>
+    <div class="err-msg" style="max-width:390px">End date must be on or after the start date.</div>
+    <h3>Empty state</h3>
+    <div class="demo narrow"><div class="empty"><div class="big">🌱</div><h3>No habits yet</h3><p>Plant your first habit and tick it off every day.</p><button class="btn-soft">Add a habit</button></div></div>
+    <h3>Loading skeleton</h3>
+    <div class="demo narrow"><div class="skel"></div></div>
+  </section>
+
+  <section>
+    <h2>Notes</h2>
+    <p class="note">Source: Habit Tracker MVP - All Screens - v1.html (captured 2026-10-17). Items marked Proposed in DESIGN.md (contrast adjustments, focus ring, disabled state, reduced motion) are suggestions and not part of the mockup; the disabled button above uses the Proposed 40% opacity.</p>
+  </section>
+</main>
+</body>
+</html>

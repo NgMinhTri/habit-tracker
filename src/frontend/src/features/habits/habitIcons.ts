@@ -1,0 +1,48 @@
+export const HABIT_ICONS = [
+  { key: 'stretching', glyph: '🧘' },
+  { key: 'stretch', glyph: '🙆' },
+  { key: 'water', glyph: '💧' },
+  { key: 'running', glyph: '🏃' },
+  { key: 'cycling', glyph: '🚴' },
+  { key: 'swimming', glyph: '🏊' },
+  { key: 'weightlifting', glyph: '🏋️' },
+  { key: 'walking', glyph: '🚶' },
+  { key: 'reading', glyph: '📖' },
+  { key: 'writing', glyph: '✍️' },
+  { key: 'headphones', glyph: '🎧' },
+  { key: 'guitar', glyph: '🎸' },
+  { key: 'piano', glyph: '🎹' },
+  { key: 'art', glyph: '🎨' },
+  { key: 'laptop', glyph: '💻' },
+  { key: 'brain', glyph: '🧠' },
+  { key: 'globe', glyph: '🌐' },
+  { key: 'sleep', glyph: '🛏️' },
+  { key: 'sunrise', glyph: '🌅' },
+  { key: 'moon', glyph: '🌙' },
+  { key: 'salad', glyph: '🥗' },
+  { key: 'apple', glyph: '🍎' },
+  { key: 'broccoli', glyph: '🥦' },
+  { key: 'tea', glyph: '🍵' },
+  { key: 'coffee', glyph: '☕' },
+  { key: 'tooth', glyph: '🦷' },
+  { key: 'skincare', glyph: '🧴' },
+  { key: 'bath', glyph: '🛁' },
+  { key: 'cleaning', glyph: '🧹' },
+  { key: 'plant', glyph: '🪴' },
+  { key: 'dog', glyph: '🐶' },
+  { key: 'cat', glyph: '🐱' },
+  { key: 'medicine', glyph: '💊' },
+  { key: 'no-phone', glyph: '📵' },
+  { key: 'love-letter', glyph: '💌' },
+  { key: 'prayer', glyph: '🙏' },
+  { key: 'sun', glyph: '🌞' },
+  { key: 'star', glyph: '⭐' },
+  { key: 'money', glyph: '💰' },
+  { key: 'target', glyph: '🎯' },
+] as const
+
+export const DEFAULT_HABIT_ICON = 'sun'
+
+export function getHabitIcon(key: string) {
+  return HABIT_ICONS.find((icon) => icon.key === key)?.glyph ?? '🌞'
+}
